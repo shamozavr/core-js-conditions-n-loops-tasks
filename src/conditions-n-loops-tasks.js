@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,15 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  const arr = [a, b, c];
+  let max = arr[0];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  return max;
 }
 
 /**
@@ -60,8 +67,18 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    queen.x - king.x === queen.y - king.y ||
+    king.x - queen.x === king.y - queen.y ||
+    queen.x - king.x === king.y - queen.y ||
+    king.x - queen.x === queen.y - king.y
+  ) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -82,8 +99,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    return false;
+  }
+  return a === b || a === c || b === c;
 }
 
 /**
@@ -153,8 +173,13 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  for (let i = 0; i <= str.length; i += 1) {
+    if (str[i] === letter) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +197,14 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const string = String(num);
+  for (let i = 0; i < string.length; i += 1) {
+    if (Number(string[i]) === digit) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -214,8 +245,47 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+
+function getSpiralMatrix(n) {
+  const arr = [];
+  for (let i = 0; i < n; i += 1) {
+    const subArr = [];
+    for (let k = 0; k < n; k += 1) {
+      subArr[k] = '';
+    }
+    arr[i] = subArr;
+  }
+  let row = 0;
+  let col = 0;
+  let rowEnd = n - 1;
+  let colEnd = n - 1;
+  let counter = 1;
+  while (col <= colEnd && row <= rowEnd) {
+    for (let i = col; i <= colEnd; i += 1) {
+      arr[row][i] = counter;
+      counter += 1;
+    }
+    row += 1;
+
+    for (let i = row; i <= rowEnd; i += 1) {
+      arr[i][colEnd] = counter;
+      counter += 1;
+    }
+    colEnd -= 1;
+
+    for (let i = colEnd; i >= col; i -= 1) {
+      arr[rowEnd][i] = counter;
+      counter += 1;
+    }
+    rowEnd -= 1;
+
+    for (let i = rowEnd; i >= row; i -= 1) {
+      arr[i][col] = counter;
+      counter += 1;
+    }
+    col += 1;
+  }
+  return arr;
 }
 
 /**
@@ -251,8 +321,21 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const arr2 = arr;
+  for (let i = 1; i < arr2.length; i += 1) {
+    const current = arr2[i];
+
+    let j = i - 1;
+
+    while (j >= 0 && arr2[j] > current) {
+      arr2[j + 1] = arr2[j];
+      j -= 1;
+    }
+
+    arr2[j + 1] = current;
+  }
+  return arr2;
 }
 
 /**
